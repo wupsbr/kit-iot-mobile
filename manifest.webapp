@@ -1,0 +1,22 @@
+{
+  "name": "KIT IoT",
+  "type": "privileged",
+  "description": "Kit de Desenvolvimento IoT da Campus Party Brasil 2014 #CPBR7",
+  "launch_path": "/app.html",
+  "icons": {
+    "128": "/images/ico-ffOS-128x128.png",
+    "60": "/images/ico-ffOS-60x60.png",
+    "48": "/images/ico-ffOS-48x48.png",
+    "30": "/images/ico-ffOS-30x30.png",
+    "16": "/images/ico-ffOS-16x16.png"
+  },
+  "version": "1.0",
+  "developer": {
+    "name": "Telefónica Digital",
+    "url": "http://www.tid.es/"
+  },
+  "default_locale": "pt-BR",
+  "permissions": {
+      "systemXHR": {"description":"Acessar as APIs da DCA e registrar erros de rede."}
+  }
+}

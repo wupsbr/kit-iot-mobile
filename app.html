@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width, user-scalable=no" />
+  <title>KIT IoT</title>
+  <!-- Building blocks -->
+  <link rel="stylesheet" href="style/action_menu.css">
+  <link rel="stylesheet" href="style/buttons.css">
+  <link rel="stylesheet" href="style/confirm.css">
+  <link rel="stylesheet" href="style/edit_mode.css">
+  <link rel="stylesheet" href="style/headers.css">
+  <link rel="stylesheet" href="style/input_areas.css">
+  <link rel="stylesheet" href="style/status.css">
+  <link rel="stylesheet" href="style/switches.css">
+  <link rel="stylesheet" href="style_unstable/drawer.css">
+  <link rel="stylesheet" href="style_unstable/lists.css">
+  <link rel="stylesheet" href="style_unstable/progress_activity.css">
+  <link rel="stylesheet" href="style_unstable/seekbars.css">
+  <link rel="stylesheet" href="style_unstable/tabs.css">
+  <link rel="stylesheet" href="style_unstable/toolbars.css">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="icons/styles/action_icons.css">
+  <link rel="stylesheet" href="icons/styles/media_icons.css">
+  <link rel="stylesheet" href="icons/styles/comms_icons.css">
+  <link rel="stylesheet" href="icons/styles/settings_icons.css">
+
+  <!-- Transitions -->
+  <link rel="stylesheet" href="transitions.css">
+  
+  <!-- Util CSS: some extra tricks -->
+  <link rel="stylesheet" href="util.css">
+  <link rel="stylesheet" href="fonts.css">
+
+  <!-- Additional markup to make Building Blocks kind of cross browser -->
+  <link rel="stylesheet" href="cross_browser.css">
+
+  <link rel="apple-touch-icon" href="images/ico-ffOS-128x128.png"/>
+  <link rel="apple-touch-icon-precomposed" href="icon" />
+  
+  <link rel="stylesheet" href="style/dcamobile.css">
+
+</head>
+<body>
+  <section id="index" data-position="current">
+
+    <section id="drawer" role="region">
+      <header class="fixed">
+        <h1>DCA <em>KIT de Desenvolvimento IoT</em></h1>
+      </header>
+      <article class="content scrollable header">
+
+        <header><h2>Entre com seus dados de acesso:</h2></header>
+        <form id="form-dca-login">
+          <p>
+            <input type="text" placeholder="token" id="dca_username" tabindex="1" required>
+            <button type="reset">Limpar</button>
+          </p>
+
+        </form>
+
+        <p>
+          <button id="btn-dca-dashboard" class="recommend">Entrar</button>
+        </p>
+
+        <p id="telefonicalogo">
+          <img src="images/telefonica-vivo-logo.png" alt="Telefônica | VIVO" height="30"/>
+        </p>
+
+      </article>
+    </section> <!-- end drawer -->
+  </section> <!-- end index -->
+
+
+  <section role="region" id="dca-dashboard" data-position="right">
+    <section role="region">
+      <header class="fixed">
+        <a id="btn-dca-dashboard-back" href="#"><span class="icon icon-back">voltar</span></a>
+        <h1>DCA</h1>
+      </header>
+      <article class="content scrollable header">
+
+        <section data-type="list">
+          <header><h2 id="dca-assets-label">Dispositivos encontrados</h2></header>
+          <ul id="dca-assets-list">
+          </ul>        
+        </section>
+
+
+      </article>
+    </section>
+  </section>
+
+
+  <section role="region" id="dca-dashboard-asset" data-position="right">
+    <section role="region">
+      <header class="fixed">
+        <a id="btn-dca-dashboard-asset-back" href="#"><span class="icon icon-back">voltar</span></a>
+        <h1>DCA&nbsp;<em id="dca-dashboard-asset-name"></em></h1>
+      </header>
+      <article class="content scrollable header">
+        <section data-type="list">
+          <header><h2 id="dca-dashboard-asset-sensors-label">Sensores</h2></header>
+          <ul id="dca-dashboard-asset-sensors-list">
+          </ul>        
+        </section>
+      </article>
+    </section>
+  </section>
+
+
+  <section role="region" id="dca-dashboard-asset-detail" data-position="right">
+    <section role="region">
+      <header class="fixed">
+        <a id="btn-dca-dashboard-asset-detail-back" href="#"><span class="icon icon-back">voltar</span></a>
+        <h1>DCA&nbsp;<em id="dca-dashboard-asset-detail-name"></em></h1>
+      </header>
+      <article class="content scrollable header">
+        <div id="graph"></div>
+      </article>
+    </section>
+  </section>
+
+
+  <script type="text/javascript" defer src="js/status.js"></script>
+  <script type="text/javascript" defer src="js/seekbars.js"></script>
+  <script type="text/javascript" defer src="js/jquery.min.js"></script>
+  <script type="text/javascript" defer src="js/raphael-min.js"></script>
+  <script type="text/javascript" defer src="js/morris.min.js"></script>
+  <script type="text/javascript" defer src="js/lib/prettify.js"></script>
+  <script type="text/javascript" defer src="js/lib/example.js"></script>
+  <script type="text/javascript" defer src="js/app.js"></script>
+
+  <script>
+    /*var mobile = (navigator.userAgent.search("Mobile") != -1);
+    if ( mobile ) {
+      //Let's reduce font-size when in landscape  
+      //fs: current font-size
+      var fs = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue( 'font-size' ), 10);
+      var mql = window.matchMedia("(orientation: portrait)");
+
+      if(mql.matches) { //portrait
+        document.documentElement.style.fontSize = fs + 'px';
+        document.body.classList.remove('landscape');
+      } else { // landscape
+        document.documentElement.style.fontSize = fs * 0.7 + 'px';
+        document.body.classList.add('landscape');
+      }
+
+      mql.addListener(function(m) {
+        if(m.matches) { //portrait
+          document.documentElement.style.fontSize = fs + 'px';
+          document.body.classList.remove('landscape');
+        }
+        else { //landscape
+          document.documentElement.style.fontSize = fs * 0.7 + 'px';
+          document.body.classList.add('landscape');
+        }
+      });
+    }*/
+  </script>
+</body>
+</html>
+
